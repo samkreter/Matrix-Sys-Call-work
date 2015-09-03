@@ -34,6 +34,13 @@ bool create_matrix (Matrix_t** new_matrix, const char* name, const unsigned int 
 						const unsigned int cols) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
+	//check for null values
+	//Since rows and cols are unsigned no need to check if they're negitive
+	if(new_matrix == NULL || name == NULL || rows == NULL || cols == NULL){
+		return false;
+	}
+
+	//####################################
 
 	*new_matrix = calloc(1,sizeof(Matrix_t));
 	if (!(*new_matrix)) {
