@@ -482,19 +482,22 @@ bool random_matrix(Matrix_t* m, unsigned int start_range, unsigned int end_range
 
 	//TODO FUNCTION COMMENT
  /*
- * PURPOSE: add Random unsigned ints to the passed in matrix
+ * PURPOSE: add data to the passed in matrix
  * INPUTS:
- *	m: pointer to the matrix to add the random numbers to
- *  start_range: the start of the range for the random numbers to be in
- *  TODOCHECK end_range: the end range that the random number will be in
+ *	m: pointer to the matrix to add the data to
+ *  data: data to be added to the matrix
  * RETURN:
- *  If no errors with input then true
- *  else false for the input errors.
+ *  void
  *
  **/
 void load_matrix (Matrix_t* m, unsigned int* data) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
+	if(m == NULL || data == NULL){
+		return;
+	}
+	//####################################
+
 	memcpy(m->data,data,m->rows * m->cols * sizeof(unsigned int));
 }
 
