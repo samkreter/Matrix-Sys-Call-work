@@ -376,17 +376,20 @@ bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
  /*
  * PURPOSE: add Random unsigned ints to the passed in matrix
  * INPUTS:
- *	m: pointer to the matrix to add the random numbers to
- *  start_range: the start of the range for the random numbers to be in
- *  TODOCHECK end_range: the end range that the random number will be in
+ *	m: pointer to the matrix to write its data to a file
+ *  matrix_output_filename: name of the file to write data out to
  * RETURN:
- *  If no errors with input then true
- *  else false for the input errors.
+ *  If no errors with opening and writing file then true
+ *  else false with errors.
  *
  **/
 bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
+	if(matrix_output_filename == NULL || m == NULL){
+		return false;
+	}
+	//####################################
 
 	int fd = open (matrix_output_filename, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	/* ERROR HANDLING USING errorno*/
