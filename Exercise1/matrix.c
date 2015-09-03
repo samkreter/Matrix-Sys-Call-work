@@ -55,7 +55,17 @@ bool create_matrix (Matrix_t** new_matrix, const char* name, const unsigned int 
 }
 
 	//TODO FUNCTION COMMENT
-
+ /*
+ * PURPOSE: add Random unsigned ints to the passed in matrix
+ * INPUTS:
+ *	m: pointer to the matrix to add the random numbers to
+ *  start_range: the start of the range for the random numbers to be in
+ *  TODOCHECK end_range: the end range that the random number will be in
+ * RETURN:
+ *  If no errors with input then true
+ *  else false for the input errors.
+ *
+ **/
 void destroy_matrix (Matrix_t** m) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
@@ -68,6 +78,17 @@ void destroy_matrix (Matrix_t** m) {
 
 	
 	//TODO FUNCTION COMMENT
+ /*
+ * PURPOSE: add Random unsigned ints to the passed in matrix
+ * INPUTS:
+ *	m: pointer to the matrix to add the random numbers to
+ *  start_range: the start of the range for the random numbers to be in
+ *  TODOCHECK end_range: the end range that the random number will be in
+ * RETURN:
+ *  If no errors with input then true
+ *  else false for the input errors.
+ *
+ **/
 bool equal_matrices (Matrix_t* a, Matrix_t* b) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
@@ -84,6 +105,17 @@ bool equal_matrices (Matrix_t* a, Matrix_t* b) {
 }
 
 	//TODO FUNCTION COMMENT
+ /*
+ * PURPOSE: add Random unsigned ints to the passed in matrix
+ * INPUTS:
+ *	m: pointer to the matrix to add the random numbers to
+ *  start_range: the start of the range for the random numbers to be in
+ *  TODOCHECK end_range: the end range that the random number will be in
+ * RETURN:
+ *  If no errors with input then true
+ *  else false for the input errors.
+ *
+ **/
 bool duplicate_matrix (Matrix_t* src, Matrix_t* dest) {
 
 
@@ -101,6 +133,17 @@ bool duplicate_matrix (Matrix_t* src, Matrix_t* dest) {
 }
 
 	//TODO FUNCTION COMMENT
+ /*
+ * PURPOSE: add Random unsigned ints to the passed in matrix
+ * INPUTS:
+ *	m: pointer to the matrix to add the random numbers to
+ *  start_range: the start of the range for the random numbers to be in
+ *  TODOCHECK end_range: the end range that the random number will be in
+ * RETURN:
+ *  If no errors with input then true
+ *  else false for the input errors.
+ *
+ **/
 bool bitwise_shift_matrix (Matrix_t* a, char direction, unsigned int shift) {
 	
 	//TODO ERROR CHECK INCOMING PARAMETERS
@@ -132,6 +175,17 @@ bool bitwise_shift_matrix (Matrix_t* a, char direction, unsigned int shift) {
 }
 
 	//TODO FUNCTION COMMENT
+ /*
+ * PURPOSE: add Random unsigned ints to the passed in matrix
+ * INPUTS:
+ *	m: pointer to the matrix to add the random numbers to
+ *  start_range: the start of the range for the random numbers to be in
+ *  TODOCHECK end_range: the end range that the random number will be in
+ * RETURN:
+ *  If no errors with input then true
+ *  else false for the input errors.
+ *
+ **/
 bool add_matrices (Matrix_t* a, Matrix_t* b, Matrix_t* c) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
@@ -167,6 +221,17 @@ void display_matrix (Matrix_t* m) {
 }
 
 	//TODO FUNCTION COMMENT
+ /*
+ * PURPOSE: add Random unsigned ints to the passed in matrix
+ * INPUTS:
+ *	m: pointer to the matrix to add the random numbers to
+ *  start_range: the start of the range for the random numbers to be in
+ *  TODOCHECK end_range: the end range that the random number will be in
+ * RETURN:
+ *  If no errors with input then true
+ *  else false for the input errors.
+ *
+ **/
 bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 	
 	//TODO ERROR CHECK INCOMING PARAMETERS
@@ -300,6 +365,17 @@ bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 }
 
 	//TODO FUNCTION COMMENT
+ /*
+ * PURPOSE: add Random unsigned ints to the passed in matrix
+ * INPUTS:
+ *	m: pointer to the matrix to add the random numbers to
+ *  start_range: the start of the range for the random numbers to be in
+ *  TODOCHECK end_range: the end range that the random number will be in
+ * RETURN:
+ *  If no errors with input then true
+ *  else false for the input errors.
+ *
+ **/
 bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
 	
 	//TODO ERROR CHECK INCOMING PARAMETERS
@@ -368,6 +444,20 @@ bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
 }
 
 	//TODO FUNCTION COMMENT
+<<<<<<< Updated upstream
+=======
+ /*
+ * PURPOSE: add Random unsigned ints to the passed in matrix
+ * INPUTS:
+ *	m: pointer to the matrix to add the random numbers to
+ *  start_range: the start of the range for the random numbers to be in
+ *  TODOCHECK end_range: the end range that the random number will be in
+ * RETURN:
+ *  If no errors with input then true
+ *  else false for the input errors.
+ *
+ **/
+>>>>>>> Stashed changes
 bool random_matrix(Matrix_t* m, unsigned int start_range, unsigned int end_range) {
 	
 	//TODO ERROR CHECK INCOMING PARAMETERS
@@ -383,6 +473,17 @@ bool random_matrix(Matrix_t* m, unsigned int start_range, unsigned int end_range
 /*Protected Functions in C*/
 
 	//TODO FUNCTION COMMENT
+ /*
+ * PURPOSE: add Random unsigned ints to the passed in matrix
+ * INPUTS:
+ *	m: pointer to the matrix to add the random numbers to
+ *  start_range: the start of the range for the random numbers to be in
+ *  TODOCHECK end_range: the end range that the random number will be in
+ * RETURN:
+ *  If no errors with input then true
+ *  else false for the input errors.
+ *
+ **/
 void load_matrix (Matrix_t* m, unsigned int* data) {
 	
 	//TODO ERROR CHECK INCOMING PARAMETERS
@@ -390,6 +491,17 @@ void load_matrix (Matrix_t* m, unsigned int* data) {
 }
 
 	//TODO FUNCTION COMMENT
+ /*
+ * PURPOSE: add Random unsigned ints to the passed in matrix
+ * INPUTS:
+ *	m: pointer to the matrix to add the random numbers to
+ *  start_range: the start of the range for the random numbers to be in
+ *  TODOCHECK end_range: the end range that the random number will be in
+ * RETURN:
+ *  If no errors with input then true
+ *  else false for the input errors.
+ *
+ **/
 unsigned int add_matrix_to_array (Matrix_t** mats, Matrix_t* new_matrix, unsigned int num_mats) {
 	
 	//TODO ERROR CHECK INCOMING PARAMETERS
