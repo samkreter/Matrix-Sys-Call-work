@@ -18,10 +18,10 @@
 /*protected functions*/
 void load_matrix (Matrix_t* m, unsigned int* data);
 
-/* 
- * PURPOSE: instantiates a new matrix with the passed name, rows, cols 
- * INPUTS: 
- *	name the name of the matrix limited to 50 characters 
+/*
+ * PURPOSE: instantiates a new matrix with the passed name, rows, cols
+ * INPUTS:
+ *	name the name of the matrix limited to 50 characters
  *  rows the number of rows the matrix
  *  cols the number of cols the matrix
  * RETURN:
@@ -45,7 +45,7 @@ bool create_matrix (Matrix_t** new_matrix, const char* name, const unsigned int 
 	}
 	(*new_matrix)->rows = rows;
 	(*new_matrix)->cols = cols;
-	unsigned int len = strlen(name) + 1; 
+	unsigned int len = strlen(name) + 1;
 	if (len > MATRIX_NAME_LEN) {
 		return false;
 	}
@@ -56,27 +56,28 @@ bool create_matrix (Matrix_t** new_matrix, const char* name, const unsigned int 
 
 	//TODO FUNCTION COMMENT
  /*
- * PURPOSE: add Random unsigned ints to the passed in matrix
+ * PURPOSE: free the memory for the matrix array
  * INPUTS:
- *	m: pointer to the matrix to add the random numbers to
- *  start_range: the start of the range for the random numbers to be in
- *  TODOCHECK end_range: the end range that the random number will be in
+ *	m: pointer to the matrix array to be freed
  * RETURN:
- *  If no errors with input then true
- *  else false for the input errors.
+ *  void
  *
  **/
 void destroy_matrix (Matrix_t** m) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	
+	if(m == NULL){
+		return;
+	}
+	//####################################
+
 	free((*m)->data);
 	free(*m);
 	*m = NULL;
 }
 
 
-	
+
 	//TODO FUNCTION COMMENT
  /*
  * PURPOSE: add Random unsigned ints to the passed in matrix
@@ -92,9 +93,9 @@ void destroy_matrix (Matrix_t** m) {
 bool equal_matrices (Matrix_t* a, Matrix_t* b) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	
+
 	if (!a || !b || !a->data || !b->data) {
-		return false;	
+		return false;
 	}
 
 	int result = memcmp(a->data,b->data, sizeof(unsigned int) * a->rows * a->cols);
@@ -128,7 +129,7 @@ bool duplicate_matrix (Matrix_t* src, Matrix_t* dest) {
 	 * copy over data
 	 */
 	unsigned int bytesToCopy = sizeof(unsigned int) * src->rows * src->cols;
-	memcpy(src->data,dest->data, bytesToCopy);	
+	memcpy(src->data,dest->data, bytesToCopy);
 	return equal_matrices (src,dest);
 }
 
@@ -145,7 +146,7 @@ bool duplicate_matrix (Matrix_t* src, Matrix_t* dest) {
  *
  **/
 bool bitwise_shift_matrix (Matrix_t* a, char direction, unsigned int shift) {
-	
+
 	//TODO ERROR CHECK INCOMING PARAMETERS
 	if (!a) {
 		return false;
@@ -170,7 +171,7 @@ bool bitwise_shift_matrix (Matrix_t* a, char direction, unsigned int shift) {
 			}
 		}
 	}
-	
+
 	return true;
 }
 
@@ -204,7 +205,7 @@ bool add_matrices (Matrix_t* a, Matrix_t* b, Matrix_t* c) {
 
 	//TODO FUNCTION COMMENT
 void display_matrix (Matrix_t* m) {
-	
+
 	//TODO ERROR CHECK INCOMING PARAMETERS
 
 
@@ -233,7 +234,7 @@ void display_matrix (Matrix_t* m) {
  *
  **/
 bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
-	
+
 	//TODO ERROR CHECK INCOMING PARAMETERS
 
 
@@ -247,7 +248,7 @@ bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 			perror("FILE ALREADY IN USE\n");
 		}
 		else if (errno == EBADF) {
-			perror("BAD FILE DESCRIPTOR\n");	
+			perror("BAD FILE DESCRIPTOR\n");
 		}
 		else if (errno == EEXIST) {
 			perror("FILE EXIST\n");
@@ -259,7 +260,7 @@ bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 	unsigned int name_len = 0;
 	unsigned int rows = 0;
 	unsigned int cols = 0;
-	
+
 	if (read(fd,&name_len,sizeof(unsigned int)) != sizeof(unsigned int)) {
 		printf("FAILED TO READING FILE\n");
 		if (errno == EACCES ) {
@@ -269,7 +270,7 @@ bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 			perror("FILE ALREADY IN USE\n");
 		}
 		else if (errno == EBADF) {
-			perror("BAD FILE DESCRIPTOR\n");	
+			perror("BAD FILE DESCRIPTOR\n");
 		}
 		else if (errno == EEXIST) {
 			perror("FILE EXIST\n");
@@ -286,13 +287,13 @@ bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 			perror("FILE ALREADY IN USE\n");
 		}
 		else if (errno == EBADF) {
-			perror("BAD FILE DESCRIPTOR\n");	
+			perror("BAD FILE DESCRIPTOR\n");
 		}
 		else if (errno == EEXIST) {
 			perror("FILE EXIST\n");
 		}
 
-		return false;	
+		return false;
 	}
 
 	if (read (fd,&rows, sizeof(unsigned int)) != sizeof(unsigned int)) {
@@ -304,7 +305,7 @@ bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 			perror("FILE ALREADY IN USE\n");
 		}
 		else if (errno == EBADF) {
-			perror("BAD FILE DESCRIPTOR\n");	
+			perror("BAD FILE DESCRIPTOR\n");
 		}
 		else if (errno == EEXIST) {
 			perror("FILE EXIST\n");
@@ -322,7 +323,7 @@ bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 			perror("FILE ALREADY IN USE\n");
 		}
 		else if (errno == EBADF) {
-			perror("BAD FILE DESCRIPTOR\n");	
+			perror("BAD FILE DESCRIPTOR\n");
 		}
 		else if (errno == EEXIST) {
 			perror("FILE EXIST\n");
@@ -342,13 +343,13 @@ bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 			perror("FILE ALREADY IN USE\n");
 		}
 		else if (errno == EBADF) {
-			perror("BAD FILE DESCRIPTOR\n");	
+			perror("BAD FILE DESCRIPTOR\n");
 		}
 		else if (errno == EEXIST) {
 			perror("FILE EXIST\n");
 		}
 
-		return false;	
+		return false;
 	}
 
 	if (!create_matrix(m,name_buffer,rows,cols)) {
@@ -377,7 +378,7 @@ bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
  *
  **/
 bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
-	
+
 	//TODO ERROR CHECK INCOMING PARAMETERS
 
 	int fd = open (matrix_output_filename, O_CREAT | O_RDWR | O_TRUNC, 0644);
@@ -391,7 +392,7 @@ bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
 			perror("FILE ALREADY IN USE\n");
 		}
 		else if (errno == EBADF) {
-			perror("BAD FILE DESCRIPTOR\n");	
+			perror("BAD FILE DESCRIPTOR\n");
 		}
 		else if (errno == EEXIST) {
 			perror("FILE EXISTS\n");
@@ -407,7 +408,7 @@ bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
 	unsigned char* output_buffer = calloc(numberOfBytes,sizeof(unsigned char));
 	unsigned int offset = 0;
 	memcpy(&output_buffer[offset], &name_len, sizeof(unsigned int)); // IMPORTANT C FUNCTION TO KNOW
-	offset += sizeof(unsigned int);	
+	offset += sizeof(unsigned int);
 	memcpy(&output_buffer[offset], m->name,name_len);
 	offset += name_len;
 	memcpy(&output_buffer[offset],&m->rows,sizeof(unsigned int));
@@ -427,14 +428,14 @@ bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
 			perror("FILE ALREADY IN USE\n");
 		}
 		else if (errno == EBADF) {
-			perror("BAD FILE DESCRIPTOR\n");	
+			perror("BAD FILE DESCRIPTOR\n");
 		}
 		else if (errno == EEXIST) {
 			perror("FILE EXIST\n");
 		}
 		return false;
 	}
-	
+
 	if (close(fd)) {
 		return false;
 	}
@@ -444,8 +445,6 @@ bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
 }
 
 	//TODO FUNCTION COMMENT
-<<<<<<< Updated upstream
-=======
  /*
  * PURPOSE: add Random unsigned ints to the passed in matrix
  * INPUTS:
@@ -457,9 +456,8 @@ bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
  *  else false for the input errors.
  *
  **/
->>>>>>> Stashed changes
 bool random_matrix(Matrix_t* m, unsigned int start_range, unsigned int end_range) {
-	
+
 	//TODO ERROR CHECK INCOMING PARAMETERS
 
 	for (unsigned int i = 0; i < m->rows; ++i) {
@@ -485,7 +483,7 @@ bool random_matrix(Matrix_t* m, unsigned int start_range, unsigned int end_range
  *
  **/
 void load_matrix (Matrix_t* m, unsigned int* data) {
-	
+
 	//TODO ERROR CHECK INCOMING PARAMETERS
 	memcpy(m->data,data,m->rows * m->cols * sizeof(unsigned int));
 }
@@ -503,13 +501,13 @@ void load_matrix (Matrix_t* m, unsigned int* data) {
  *
  **/
 unsigned int add_matrix_to_array (Matrix_t** mats, Matrix_t* new_matrix, unsigned int num_mats) {
-	
+
 	//TODO ERROR CHECK INCOMING PARAMETERS
 	static long int current_position = 0;
 	const long int pos = current_position % num_mats;
 	if ( mats[pos] ) {
 		destroy_matrix(&mats[pos]);
-	} 
+	}
 	mats[pos] = new_matrix;
 	current_position++;
 	return pos;
