@@ -12,15 +12,25 @@
 #include "matrix.h"
 
 void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats);
-unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats, 
+unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats,
 			const char* target);
 
-// TODO complete the defintion of this function. 
+// TODO complete the defintion of this function.
+
 void destroy_remaining_heap_allocations(Matrix_t **mats, unsigned int num_mats);
 
 	//TODO FUNCTION COMMENT
+
+/*
+ * PURPOSE: free the memory that holds all the commands
+ * INPUTS:
+ *	cmd: double pointer to the struct that holds the commands
+ * RETURN:
+ *  void
+ *
+ **/
 int main (int argc, char **argv) {
-	srand(time(NULL));		
+	srand(time(NULL));
 	char *line = NULL;
 	Commands_t* cmd;
 
@@ -41,12 +51,12 @@ int main (int argc, char **argv) {
 
 	line = readline("> ");
 	while (strncmp(line,"exit", strlen("exit")  + 1) != 0) {
-		
+
 		if (!parse_user_input(line,&cmd)) {
 			printf("Failed at parsing command\n\n");
 		}
-		
-		if (cmd->num_cmds > 1) {	
+
+		if (cmd->num_cmds > 1) {
 			run_commands(cmd,mats,10);
 		}
 		if (line) {
@@ -57,10 +67,19 @@ int main (int argc, char **argv) {
 	}
 	free(line);
 	destroy_remaining_heap_allocations(mats,10);
-	return 0;	
+	return 0;
 }
 
 	//TODO FUNCTION COMMENT
+
+/*
+ * PURPOSE: free the memory that holds all the commands
+ * INPUTS:
+ *	cmd: double pointer to the struct that holds the commands
+ * RETURN:
+ *  void
+ *
+ **/
 void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 	//TODO ERROR CHECK INCOMING PARAMETERS
 
@@ -69,7 +88,9 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 	if (strncmp(cmd->cmds[0],"display",strlen("display") + 1) == 0
 		&& cmd->num_cmds == 2) {
 			/*find the requested matrix*/
+			printf("testing\n");
 			int idx = find_matrix_given_name(mats,num_mats,cmd->cmds[1]);
+			printf("still testing\n");
 			if (idx >= 0) {
 				display_matrix (mats[idx]);
 			}
@@ -84,18 +105,18 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 			int mat2_idx = find_matrix_given_name(mats,num_mats,cmd->cmds[2]);
 			if (mat1_idx >= 0 && mat2_idx >= 0) {
 				Matrix_t* c = NULL;
-				if( !create_matrix (&c,cmd->cmds[3], mats[mat1_idx]->rows, 
+				if( !create_matrix (&c,cmd->cmds[3], mats[mat1_idx]->rows,
 						mats[mat1_idx]->cols)) {
 					printf("Failure to create the result Matrix (%s)\n", cmd->cmds[3]);
 					return;
 				}
-			
+
 				add_matrix_to_array(mats,c, num_mats); //TODO ERROR CHECK NEEDED
 
 
 				if (! add_matrices(mats[mat1_idx], mats[mat2_idx],c) ) {
 					printf("Failure to add %s with %s into %s\n", mats[mat1_idx]->name, mats[mat2_idx]->name,c->name);
-					return;	
+					return;
 				}
 			}
 	}
@@ -104,7 +125,7 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 		int mat1_idx = find_matrix_given_name(mats,num_mats,cmd->cmds[1]);
 		if (mat1_idx >= 0 ) {
 				Matrix_t* dup_mat = NULL;
-				if( !create_matrix (&dup_mat,cmd->cmds[2], mats[mat1_idx]->rows, 
+				if( !create_matrix (&dup_mat,cmd->cmds[2], mats[mat1_idx]->rows,
 						mats[mat1_idx]->cols)) {
 					return;
 				}
@@ -154,10 +175,10 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 		if(! read_matrix(cmd->cmds[1],&new_matrix)) {
 			printf("Read Failed\n");
 			return;
-		}	
-		
+		}
+
 		add_matrix_to_array(mats,new_matrix, num_mats); //TODO ERROR CHECK NEEDED
-		printf("Matrix (%s) is read from the filesystem\n", cmd->cmds[1]);	
+		printf("Matrix (%s) is read from the filesystem\n", cmd->cmds[1]);
 	}
 	else if (strncmp(cmd->cmds[0],"write",strlen("write") + 1) == 0
 		&& cmd->num_cmds == 2) {
@@ -196,10 +217,23 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 }
 
 	//TODO FUNCTION COMMENT
+/*
+ * PURPOSE: checks if the passed in name is in the array of stored matrices
+ * INPUTS:
+ *	mats: double pointer to the struct witht he array of matrices
+ * RETURN:
+ *  void
+ *
+ **/
 unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats, const char* target) {
 	//TODO ERROR CHECK INCOMING PARAMETERS
 
+	if(!mats || !target || num_mats < sizeof(mats)){
+		return -1;
+	}
+
 	for (int i = 0; i < num_mats; ++i) {
+		printf("%d\n", i);
 		if (strncmp(mats[i]->name,target,strlen(mats[i]->name)) == 0) {
 			return i;
 		}
@@ -208,8 +242,16 @@ unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats, con
 }
 
 	//TODO FUNCTION COMMENT
+/*
+ * PURPOSE: free the memory that holds all the commands
+ * INPUTS:
+ *	cmd: double pointer to the struct that holds the commands
+ * RETURN:
+ *  void
+ *
+ **/
 void destroy_remaining_heap_allocations(Matrix_t **mats, unsigned int num_mats) {
-	
+
 	//TODO ERROR CHECK INCOMING PARAMETERS
 
 	// COMPLETE MISSING MEMORY CLEARING HERE
