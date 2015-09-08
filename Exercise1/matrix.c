@@ -143,11 +143,11 @@ bool duplicate_matrix (Matrix_t* src, Matrix_t* dest) {
 
 	//TODO FUNCTION COMMENT
  /*
- * PURPOSE: add Random unsigned ints to the passed in matrix
+ * PURPOSE: Performs either a left or right shift on all elements in the passed in matrix
  * INPUTS:
- *	m: pointer to the matrix to add the random numbers to
- *  start_range: the start of the range for the random numbers to be in
- *  TODOCHECK end_range: the end range that the random number will be in
+ *	a: pointer to the matrix to be shifted
+ *  direction: letter to tell which direction to shift to
+ *  shift: the number of bits to be shifted
  * RETURN:
  *  If no errors with input then true
  *  else false for the input errors.
@@ -156,9 +156,10 @@ bool duplicate_matrix (Matrix_t* src, Matrix_t* dest) {
 bool bitwise_shift_matrix (Matrix_t* a, char direction, unsigned int shift) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	if (!a) {
+	if (!a || !a->rows || !a->cols) {
 		return false;
 	}
+	//####################################
 
 	if (direction == 'l') {
 		unsigned int i = 0;
