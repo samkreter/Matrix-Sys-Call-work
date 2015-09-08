@@ -36,7 +36,7 @@ bool create_matrix (Matrix_t** new_matrix, const char* name, const unsigned int 
 	//TODO ERROR CHECK INCOMING PARAMETERS
 	//check for null values
 	//Since rows and cols are unsigned no need to check if they're negitive
-	if(new_matrix == NULL || name == NULL || rows == NULL || cols == NULL){
+	if(new_matrix == NULL || name == NULL){
 		return false;
 	}
 
