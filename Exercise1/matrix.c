@@ -186,19 +186,24 @@ bool bitwise_shift_matrix (Matrix_t* a, char direction, unsigned int shift) {
 
 	//TODO FUNCTION COMMENT
  /*
- * PURPOSE: add Random unsigned ints to the passed in matrix
+ * PURPOSE: adds the data at the same element of two matrices passed and places
+ 			in same element of the c matrix
  * INPUTS:
- *	m: pointer to the matrix to add the random numbers to
- *  start_range: the start of the range for the random numbers to be in
- *  TODOCHECK end_range: the end range that the random number will be in
+ *	a: pointer to the matrix to be added with second matrix
+ *  b: pointer to the matrix to be added to the first matrix
+ *  c: pointer to the matrix to store the result of the sum
  * RETURN:
- *  If no errors with input then true
- *  else false for the input errors.
+ *  If no errors with input and the row and column sizes are the same then true
+ *  else false.
  *
  **/
 bool add_matrices (Matrix_t* a, Matrix_t* b, Matrix_t* c) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
+	if(!a || !b || !c){
+		return false;
+	}
+	//####################################
 
 	if (a->rows != b->rows && a->cols != b->cols) {
 		return false;
@@ -213,10 +218,21 @@ bool add_matrices (Matrix_t* a, Matrix_t* b, Matrix_t* c) {
 }
 
 	//TODO FUNCTION COMMENT
+ /*
+ * PURPOSE: displays the data from the passed in matrix to the console
+ * INPUTS:
+ *	m: pointer to the matrix to be displayed
+ * RETURN:
+ *  void
+ *
+ **/
 void display_matrix (Matrix_t* m) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-
+	if(!m || !m->rows || !m->cols){
+		return;
+	}
+	//###################################
 
 	printf("\nMatrix Contents (%s):\n", m->name);
 	printf("DIM = (%u,%u)\n", m->rows, m->cols);
@@ -232,19 +248,22 @@ void display_matrix (Matrix_t* m) {
 
 	//TODO FUNCTION COMMENT
  /*
- * PURPOSE: add Random unsigned ints to the passed in matrix
+ * PURPOSE: reads the name, and data from a file then calls load matrix to create the matrix
  * INPUTS:
- *	m: pointer to the matrix to add the random numbers to
- *  start_range: the start of the range for the random numbers to be in
- *  TODOCHECK end_range: the end range that the random number will be in
+ *	matrix_input_filename: pointer to the name of the file to open
+ *  m: pointer to a pointer to the matrix that the new read in data with be loaded into
  * RETURN:
- *  If no errors with input then true
- *  else false for the input errors.
+ *  If no errors with input or reading in the data from the file then true
+ *  else false.
  *
  **/
 bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
+	if(!matrix_output_filename || !m){
+		return false;
+	}
+	//#####################################
 
 
 	int fd = open(matrix_input_filename,O_RDONLY);
