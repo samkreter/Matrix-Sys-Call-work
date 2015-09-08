@@ -137,7 +137,8 @@ bool duplicate_matrix (Matrix_t* src, Matrix_t* dest) {
 	 * copy over data
 	 */
 	unsigned int bytesToCopy = sizeof(unsigned int) * src->rows * src->cols;
-	memcpy(src->data,dest->data, bytesToCopy);
+	memcpy(dest->data,src->data, bytesToCopy);
+
 	return equal_matrices (src,dest);
 }
 
@@ -165,7 +166,7 @@ bool bitwise_shift_matrix (Matrix_t* a, char direction, unsigned int shift) {
 		unsigned int i = 0;
 		for (; i < a->rows; ++i) {
 			unsigned int j = 0;
-			for (; j < a->rows; ++j) {
+			for (; j < a->cols; ++j) {
 				a->data[i * a->cols + j] = a->data[i * a->cols + j] << shift;
 			}
 		}
@@ -385,7 +386,7 @@ bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 	}
 
 	load_matrix(*m,data);
-
+	free(data);
 	if (close(fd)) {
 		return false;
 
@@ -496,7 +497,7 @@ bool random_matrix(Matrix_t* m, unsigned int start_range, unsigned int end_range
 
 	for (unsigned int i = 0; i < m->rows; ++i) {
 		for (unsigned int j = 0; j < m->cols; ++j) {
-			m->data[i * m->cols + j] = rand() % end_range + start_range;
+			m->data[i * m->cols + j] = rand() % (end_range + 1 - start_range) + start_range;
 		}
 	}
 	return true;
