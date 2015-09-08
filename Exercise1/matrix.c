@@ -36,7 +36,7 @@ bool create_matrix (Matrix_t** new_matrix, const char* name, const unsigned int 
 	//TODO ERROR CHECK INCOMING PARAMETERS
 	//check for null values
 	//Since rows and cols are unsigned no need to check if they're negitive
-	if(new_matrix == NULL || name == NULL){
+	if(!new_matrix || !name){
 		return false;
 	}
 
@@ -73,7 +73,7 @@ bool create_matrix (Matrix_t** new_matrix, const char* name, const unsigned int 
 void destroy_matrix (Matrix_t** m) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	if(m == NULL){
+	if(!m){
 		return;
 	}
 	//####################################
@@ -87,23 +87,23 @@ void destroy_matrix (Matrix_t** m) {
 
 	//TODO FUNCTION COMMENT
  /*
- * PURPOSE: add Random unsigned ints to the passed in matrix
+ * PURPOSE: check if the data in the two matrices passed in are equal
  * INPUTS:
- *	m: pointer to the matrix to add the random numbers to
- *  start_range: the start of the range for the random numbers to be in
- *  TODOCHECK end_range: the end range that the random number will be in
+ *	a: pointer to  a matrix to be compared to
+ *  b: pointer to second matrix to be compared to
  * RETURN:
- *  If no errors with input then true
- *  else false for the input errors.
+ *  If no errors and the data of the two matrices are equal then true
+ *  else false.
  *
  **/
 bool equal_matrices (Matrix_t* a, Matrix_t* b) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-
 	if (!a || !b || !a->data || !b->data) {
 		return false;
 	}
+	//#####################################
+
 
 	int result = memcmp(a->data,b->data, sizeof(unsigned int) * a->rows * a->cols);
 	if (result == 0) {
@@ -114,14 +114,13 @@ bool equal_matrices (Matrix_t* a, Matrix_t* b) {
 
 	//TODO FUNCTION COMMENT
  /*
- * PURPOSE: add Random unsigned ints to the passed in matrix
+ * PURPOSE: duplicate the data from the src matrix to the dest matrix
  * INPUTS:
- *	m: pointer to the matrix to add the random numbers to
- *  start_range: the start of the range for the random numbers to be in
- *  TODOCHECK end_range: the end range that the random number will be in
+ *	src: pointer to the matrix of the origiinal matrix
+ *  dest: pointer to the matrix to copy the data form src matrix to
  * RETURN:
- *  If no errors with input then true
- *  else false for the input errors.
+ *  If no errors with input and matrix are duplicated and checked then true
+ *  else false for the input errors or not equal matrixs after duplication.
  *
  **/
 bool duplicate_matrix (Matrix_t* src, Matrix_t* dest) {
@@ -129,9 +128,11 @@ bool duplicate_matrix (Matrix_t* src, Matrix_t* dest) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
 
-	if (!src) {
+	if (!src || !dest) {
 		return false;
 	}
+	//####################################
+
 	/*
 	 * copy over data
 	 */
