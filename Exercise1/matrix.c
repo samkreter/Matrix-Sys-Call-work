@@ -260,7 +260,7 @@ void display_matrix (Matrix_t* m) {
 bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	if(!matrix_output_filename || !m){
+	if(!matrix_input_filename || !m){
 		return false;
 	}
 	//#####################################
@@ -395,7 +395,7 @@ bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 
 	//TODO FUNCTION COMMENT
  /*
- * PURPOSE: add Random unsigned ints to the passed in matrix
+ * PURPOSE: create buffer from the data in the passed in matrix then write to a file
  * INPUTS:
  *	m: pointer to the matrix to write its data to a file
  *  matrix_output_filename: name of the file to write data out to
@@ -407,7 +407,7 @@ bool read_matrix (const char* matrix_input_filename, Matrix_t** m) {
 bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	if(matrix_output_filename == NULL || m == NULL){
+	if(!matrix_output_filename || !m){
 		return false;
 	}
 	//####################################
@@ -481,7 +481,7 @@ bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
  * INPUTS:
  *	m: pointer to the matrix to add the random numbers to
  *  start_range: the start of the range for the random numbers to be in
- *  TODOCHECK end_range: the end range that the random number will be in
+ *  end_range: the end range that the random number will be in
  * RETURN:
  *  If no errors with input then true
  *  else false for the input errors.
@@ -490,6 +490,9 @@ bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
 bool random_matrix(Matrix_t* m, unsigned int start_range, unsigned int end_range) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
+	if(!m || end_range < start_range){
+		return false;
+	}
 
 	for (unsigned int i = 0; i < m->rows; ++i) {
 		for (unsigned int j = 0; j < m->cols; ++j) {
@@ -524,19 +527,23 @@ void load_matrix (Matrix_t* m, unsigned int* data) {
 
 	//TODO FUNCTION COMMENT
  /*
- * PURPOSE: add Random unsigned ints to the passed in matrix
+ * PURPOSE: add newley created matrix to the array of matrices
  * INPUTS:
- *	m: pointer to the matrix to add the random numbers to
- *  start_range: the start of the range for the random numbers to be in
- *  TODOCHECK end_range: the end range that the random number will be in
+ *	mats: pointer to the array of matrices
+ *  new_matrix: newly created matrix to be added to the array
+ *  num_mats: number of matrixs already in the array
  * RETURN:
- *  If no errors with input then true
- *  else false for the input errors.
+ *  If no errors with input then return position of new matrix
+ *  else -1 for input erros
  *
  **/
 unsigned int add_matrix_to_array (Matrix_t** mats, Matrix_t* new_matrix, unsigned int num_mats) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
+	if(!mats || !new_matrix){
+		return -1;
+	}
+
 	static long int current_position = 0;
 	const long int pos = current_position % num_mats;
 	if ( mats[pos] ) {
