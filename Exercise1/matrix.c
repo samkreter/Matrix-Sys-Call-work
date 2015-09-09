@@ -33,7 +33,7 @@ void load_matrix (Matrix_t* m, unsigned int* data);
 bool create_matrix (Matrix_t** new_matrix, const char* name, const unsigned int rows,
 						const unsigned int cols) {
 
-	//TODO ERROR CHECK INCOMING PARAMETERS
+	//FINISHTODO ERROR CHECK INCOMING PARAMETERS
 	//check for null values
 	//Since rows and cols are unsigned no need to check if they're negitive
 	if(!new_matrix || !name){
@@ -61,7 +61,7 @@ bool create_matrix (Matrix_t** new_matrix, const char* name, const unsigned int 
 
 }
 
-	//TODO FUNCTION COMMENT
+	//FINISHTODO FUNCTION COMMENT
  /*
  * PURPOSE: free the memory for the matrix array
  * INPUTS:
@@ -72,7 +72,7 @@ bool create_matrix (Matrix_t** new_matrix, const char* name, const unsigned int 
  **/
 void destroy_matrix (Matrix_t** m) {
 
-	//TODO ERROR CHECK INCOMING PARAMETERS
+	//FINISHTODO ERROR CHECK INCOMING PARAMETERS
 	if(!m){
 		return;
 	}
@@ -85,7 +85,7 @@ void destroy_matrix (Matrix_t** m) {
 
 
 
-	//TODO FUNCTION COMMENT
+	//FINISHTODO FUNCTION COMMENT
  /*
  * PURPOSE: check if the data in the two matrices passed in are equal
  * INPUTS:
@@ -201,7 +201,8 @@ bool bitwise_shift_matrix (Matrix_t* a, char direction, unsigned int shift) {
 bool add_matrices (Matrix_t* a, Matrix_t* b, Matrix_t* c) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	if(!a || !b || !c){
+	if(a == NULL || b == NULL || c == NULL){
+		printf("hey add matrix");
 		return false;
 	}
 	//####################################
@@ -538,7 +539,7 @@ void load_matrix (Matrix_t* m, unsigned int* data) {
  *  else -1 for input erros
  *
  **/
-unsigned int add_matrix_to_array (Matrix_t** mats, Matrix_t* new_matrix, unsigned int num_mats) {
+int add_matrix_to_array (Matrix_t** mats, Matrix_t* new_matrix, unsigned int num_mats) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
 	if(!mats || !new_matrix){
