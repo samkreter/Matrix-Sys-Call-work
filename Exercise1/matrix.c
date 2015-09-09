@@ -98,7 +98,7 @@ void destroy_matrix (Matrix_t** m) {
  **/
 bool equal_matrices (Matrix_t* a, Matrix_t* b) {
 
-	//TODO ERROR CHECK INCOMING PARAMETERS
+	//FINISHTODO ERROR CHECK INCOMING PARAMETERS
 	if (!a || !b || !a->data || !b->data) {
 		return false;
 	}
@@ -112,7 +112,7 @@ bool equal_matrices (Matrix_t* a, Matrix_t* b) {
 	return false;
 }
 
-	//TODO FUNCTION COMMENT
+	//FINISHTODO FUNCTION COMMENT
  /*
  * PURPOSE: duplicate the data from the src matrix to the dest matrix
  * INPUTS:
@@ -126,9 +126,9 @@ bool equal_matrices (Matrix_t* a, Matrix_t* b) {
 bool duplicate_matrix (Matrix_t* src, Matrix_t* dest) {
 
 
-	//TODO ERROR CHECK INCOMING PARAMETERS
+	//FINISHTODO ERROR CHECK INCOMING PARAMETERS
 
-	if (!src || !dest) {
+	if (!src || !dest || !src->data) {
 		return false;
 	}
 	//####################################
@@ -157,7 +157,7 @@ bool duplicate_matrix (Matrix_t* src, Matrix_t* dest) {
 bool bitwise_shift_matrix (Matrix_t* a, char direction, unsigned int shift) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	if (!a || !a->rows || !a->cols) {
+	if (!a || !a->data) {
 		return false;
 	}
 	//####################################
@@ -201,8 +201,7 @@ bool bitwise_shift_matrix (Matrix_t* a, char direction, unsigned int shift) {
 bool add_matrices (Matrix_t* a, Matrix_t* b, Matrix_t* c) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	if(a == NULL || b == NULL || c == NULL){
-		printf("hey add matrix");
+	if(!a || !b || !c){
 		return false;
 	}
 	//####################################
@@ -231,7 +230,7 @@ bool add_matrices (Matrix_t* a, Matrix_t* b, Matrix_t* c) {
 void display_matrix (Matrix_t* m) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	if(!m || !m->rows || !m->cols){
+	if(!m || !m->data){
 		return;
 	}
 	//###################################
@@ -492,7 +491,7 @@ bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
 bool random_matrix(Matrix_t* m, unsigned int start_range, unsigned int end_range) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	if(!m || end_range < start_range || !m->rows || !m->cols){
+	if(!m || end_range < start_range){
 		return false;
 	}
 
@@ -519,7 +518,7 @@ bool random_matrix(Matrix_t* m, unsigned int start_range, unsigned int end_range
 void load_matrix (Matrix_t* m, unsigned int* data) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	if(m == NULL || data == NULL){
+	if(!m || !m->data || !data){
 		return;
 	}
 	//####################################

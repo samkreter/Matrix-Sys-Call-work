@@ -149,7 +149,7 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 						mats[mat1_idx]->cols)) {
 					return;
 				}
-				if(!duplicate_matrix (mats[mat1_idx], dup_mat)){
+				if(!duplicate_matrix (NULL, dup_mat)){ //mats[mat1_idx]
 					printf("Failure to duplicate the matrix");
 					return;
 				} //FINISHTODO ERROR CHECK NEEDED
