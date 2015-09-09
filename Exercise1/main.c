@@ -19,7 +19,7 @@ unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats,
 
 void destroy_remaining_heap_allocations(Matrix_t **mats, unsigned int num_mats);
 
-	//TODO FUNCTION COMMENT
+	//TODO FUNCTION COMMENT5
 
 /*
  * PURPOSE: free the memory that holds all the commands
@@ -88,9 +88,7 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 	if (strncmp(cmd->cmds[0],"display",strlen("display") + 1) == 0
 		&& cmd->num_cmds == 2) {
 			/*find the requested matrix*/
-			printf("testing\n");
 			int idx = find_matrix_given_name(mats,num_mats,cmd->cmds[1]);
-			printf("still testing\n");
 			if (idx >= 0) {
 				display_matrix (mats[idx]);
 			}
@@ -233,7 +231,6 @@ unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats, con
 	}
 
 	for (int i = 0; i < num_mats; ++i) {
-		printf("%d\n", i);
 		if (strncmp(mats[i]->name,target,strlen(mats[i]->name)) == 0) {
 			return i;
 		}
@@ -253,6 +250,14 @@ unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats, con
 void destroy_remaining_heap_allocations(Matrix_t **mats, unsigned int num_mats) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
+	if(!mats){
+		return;
+	}
 
-	// COMPLETE MISSING MEMORY CLEARING HERE
+	for(int i = 0; i < num_mats; i++){
+		if(mats[i]){
+			free(mats[i]->data);
+			free(mats[i]);
+		}
+	}
 }
