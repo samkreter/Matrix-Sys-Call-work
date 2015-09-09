@@ -12,7 +12,7 @@
 #include "matrix.h"
 
 void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats);
-unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats,
+int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats,
 			const char* target);
 
 // FINISHTODO complete the defintion of this function.
@@ -219,7 +219,7 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 	else if (strncmp(cmd->cmds[0],"write",strlen("write") + 1) == 0
 		&& cmd->num_cmds == 2) {
 		int mat1_idx = find_matrix_given_name(mats,num_mats,cmd->cmds[1]);
-		if(! write_matrix(mats[mat1_idx]->name,mats[mat1_idx])) {
+		if(mat1_idx < 0 || !write_matrix(mats[mat1_idx]->name,mats[mat1_idx])) {
 			printf("Write Failed\n");
 			return;
 		}
@@ -251,7 +251,7 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 		const unsigned int start_range = atoi(cmd->cmds[2]);
 		const unsigned int end_range = atoi(cmd->cmds[3]);
 
-		if(!random_matrix(mats[mat1_idx],start_range, end_range)){
+		if(mat1_idx < 0 || !random_matrix(mats[mat1_idx],start_range, end_range)){
 			printf("Failure in creating random numbers for the matrix");
 			return;
 		} //FINISHTODO ERROR CHECK NEEDED
@@ -274,7 +274,7 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
  *
  * NOTE:: had to add check in for loop to stop seg fault if matrix not found
  **/
-unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats, const char* target) {
+int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats, const char* target) {
 	//TODO ERROR CHECK INCOMING PARAMETERS
 
 	if(!mats || !target || num_mats < sizeof(mats)){

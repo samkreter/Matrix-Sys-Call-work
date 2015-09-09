@@ -492,7 +492,7 @@ bool write_matrix (const char* matrix_output_filename, Matrix_t* m) {
 bool random_matrix(Matrix_t* m, unsigned int start_range, unsigned int end_range) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	if(!m || end_range < start_range){
+	if(m == NULL || end_range < start_range || !m->rows || !m->cols){
 		return false;
 	}
 
