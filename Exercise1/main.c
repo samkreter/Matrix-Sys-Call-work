@@ -231,7 +231,7 @@ unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats, con
 	}
 
 	for (int i = 0; i < num_mats; ++i) {
-		if (strncmp(mats[i]->name,target,strlen(mats[i]->name)) == 0) {
+		if (mats[i] && strncmp(mats[i]->name,target,strlen(mats[i]->name)) == 0) {
 			return i;
 		}
 	}
