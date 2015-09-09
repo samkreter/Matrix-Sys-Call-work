@@ -59,7 +59,11 @@ int main (int argc, char **argv) {
 		return -1;
 	}
 	random_matrix(mats[mat_idx], 10, 15);
-	write_matrix("temp_mat", mats[mat_idx]); // TODO ERROR CHECK
+
+	if(!write_matrix("temp_mat", mats[mat_idx])){
+		perror("PROGRAM FAILED TO WRITE TO FILE");
+		return -1;
+	} // TODO ERROR CHECK
 
 	line = readline("> ");
 	while (strncmp(line,"exit", strlen("exit")  + 1) != 0) {
@@ -85,9 +89,11 @@ int main (int argc, char **argv) {
 	//TODO FUNCTION COMMENT
 
 /*
- * PURPOSE: free the memory that holds all the commands
+ * PURPOSE: run the commands passed in by the user
  * INPUTS:
- *	cmd: double pointer to the struct that holds the commands
+ *	cmd: pointer to the command structs
+ *  mats: pointer to the array that stores the current matrices
+ *  num_mats: max number of matrices that the mats array can hold
  * RETURN:
  *  void
  *
@@ -121,7 +127,10 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 					return;
 				}
 
-				add_matrix_to_array(mats,c, num_mats); //TODO ERROR CHECK NEEDED
+				if(!add_matrix_to_array(mats,c, num_mats)){
+					printf("Failure to add the new matrix to the array");
+					return;
+				} //TODO ERROR CHECK NEEDED
 
 
 				if (! add_matrices(mats[mat1_idx], mats[mat2_idx],c) ) {
@@ -139,8 +148,15 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 						mats[mat1_idx]->cols)) {
 					return;
 				}
-				duplicate_matrix (mats[mat1_idx], dup_mat); //TODO ERROR CHECK NEEDED
-				add_matrix_to_array(mats,dup_mat,num_mats); //TODO ERROR CHECK NEEDED
+				if(!duplicate_matrix (mats[mat1_idx], dup_mat)){
+					printf("Failure to duplicate the matrix");
+					return;
+				} //TODO ERROR CHECK NEEDED
+
+				if(!add_matrix_to_array(mats,dup_mat,num_mats)){
+					printf("Failure to add the new matrix to the array");
+					return;
+				} //TODO ERROR CHECK NEEDED
 				printf ("Duplication of %s into %s finished\n", mats[mat1_idx]->name, cmd->cmds[2]);
 		}
 		else {
@@ -170,8 +186,13 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 		int mat1_idx = find_matrix_given_name(mats,num_mats,cmd->cmds[1]);
 		const int shift_value = atoi(cmd->cmds[3]);
 		if (mat1_idx >= 0 ) {
-			bitwise_shift_matrix(mats[mat1_idx],cmd->cmds[2][0], shift_value); //TODO ERROR CHECK NEEDED
+			if(bitwise_shift_matrix(mats[mat1_idx],cmd->cmds[2][0], shift_value)){
+				printf("Failure to shift the matrix");
+				return;
+			} //TODO ERROR CHECK NEEDED
+
 			printf("Matrix (%s) has been shifted by %d\n", mats[mat1_idx]->name, shift_value);
+
 		}
 		else {
 			printf("Matrix shift failed\n");
@@ -187,7 +208,10 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 			return;
 		}
 
-		add_matrix_to_array(mats,new_matrix, num_mats); //TODO ERROR CHECK NEEDED
+		if(!add_matrix_to_array(mats,new_matrix, num_mats)){
+			printf("Failure to add the new matrix to the array");
+			return;
+		} //TODO ERROR CHECK NEEDED
 		printf("Matrix (%s) is read from the filesystem\n", cmd->cmds[1]);
 	}
 	else if (strncmp(cmd->cmds[0],"write",strlen("write") + 1) == 0
@@ -207,8 +231,16 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 		const unsigned int rows = atoi(cmd->cmds[2]);
 		const unsigned int cols = atoi(cmd->cmds[3]);
 
-		create_matrix(&new_mat,cmd->cmds[1],rows, cols); //TODO ERROR CHECK NEEDED
-		add_matrix_to_array(mats,new_mat,num_mats); // TODO ERROR CHECK NEEDED
+		if(!create_matrix(&new_mat,cmd->cmds[1],rows, cols)){
+			printf("Failure to create matrix");
+			return;
+		} //TODO ERROR CHECK NEEDED
+
+		if(!add_matrix_to_array(mats,new_mat,num_mats)){
+			printf("Failure to add the new matrix to the array");
+			return;
+		} // TODO ERROR CHECK NEEDED
+
 		printf("Created Matrix (%s,%u,%u)\n", new_mat->name, new_mat->rows, new_mat->cols);
 	}
 	else if (strncmp(cmd->cmds[0], "random", strlen("random") + 1) == 0
@@ -216,7 +248,10 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 		int mat1_idx = find_matrix_given_name(mats,num_mats,cmd->cmds[1]);
 		const unsigned int start_range = atoi(cmd->cmds[2]);
 		const unsigned int end_range = atoi(cmd->cmds[3]);
-		random_matrix(mats[mat1_idx],start_range, end_range); //TODO ERROR CHECK NEEDED
+		if(!random_matrix(mats[mat1_idx],start_range, end_range)){
+			printf("Failure in creating random numbers for the matrix");
+			return;
+		} //TODO ERROR CHECK NEEDED
 
 		printf("Matrix (%s) is randomized between %u %u\n", mats[mat1_idx]->name, start_range, end_range);
 	}
