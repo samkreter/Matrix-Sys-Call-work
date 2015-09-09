@@ -22,12 +22,15 @@ void destroy_remaining_heap_allocations(Matrix_t **mats, unsigned int num_mats);
 	//TODO FUNCTION COMMENT5
 
 /*
- * PURPOSE: free the memory that holds all the commands
+ * PURPOSE: acts as the control function to get user input and call nessesary functions
  * INPUTS:
- *	cmd: double pointer to the struct that holds the commands
+ *	argc: the number of arguments passed into the program
+ *	argv: array of arguments passed into the program
  * RETURN:
- *  void
- *
+ *  number with the status of the program: 1 for "alls good in here man"
+ *										  -1 for "damn, aint going so good"
+ *										 -42 for "watching tv and accidently put a dump return value"
+ *                                      -757 for "happy hour isn't that far away and sometimes my hand slips"
  **/
 int main (int argc, char **argv) {
 	srand(time(NULL));
@@ -38,8 +41,17 @@ int main (int argc, char **argv) {
 	memset(&mats,0, sizeof(Matrix_t*) * 10); // IMPORTANT C FUNCTION TO LEARN
 
 	Matrix_t *temp = NULL;
-	create_matrix (&temp,"temp_mat", 5, 5); // TODO ERROR CHECK
-	add_matrix_to_array(mats,temp, 10); //TODO ERROR CHECK NEEDED
+
+	if(!create_matrix (&temp,"temp_mat", 5, 5)){
+		perror("PROGRAM FAILED TO CREATE MATRIX");
+		return -1;
+	} // TODO ERROR CHECK
+
+	if(add_matrix_to_array(mats,temp, 10) < 0){
+		perror("PROGRAM FAILD TO ADD MATRIX TO ARRAY");
+		return -1;
+	} //TODO ERROR CHECK NEEDED
+
 	int mat_idx = find_matrix_given_name(mats,10,"temp_mat");
 
 	if (mat_idx < 0) {
@@ -242,14 +254,14 @@ unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats, con
 /*
  * PURPOSE: free the memory that holds all the commands
  * INPUTS:
- *	cmd: double pointer to the struct that holds the commands
+ *	mats: array of pointers to matrix structs
+ *	num_mats: the max number of matrices in the array
  * RETURN:
  *  void
  *
  **/
 void destroy_remaining_heap_allocations(Matrix_t **mats, unsigned int num_mats) {
 
-	//TODO ERROR CHECK INCOMING PARAMETERS
 	if(!mats){
 		return;
 	}
