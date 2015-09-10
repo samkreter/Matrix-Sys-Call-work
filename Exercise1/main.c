@@ -99,6 +99,7 @@ int main (int argc, char **argv) {
 void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 	//FINISHTODO ERROR CHECK INCOMING PARAMETERS
 	if(!cmd || !mats){
+		printf("There was an error with the inputs :)\n");
 		return;
 	}
 
@@ -277,7 +278,9 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats, const char* target) {
 	//TODO ERROR CHECK INCOMING PARAMETERS
 
-	if(!mats || !target || num_mats < sizeof(mats)){
+	//NOTE: Tried to check
+
+	if(!mats || !target){
 		return -1;
 	}
 

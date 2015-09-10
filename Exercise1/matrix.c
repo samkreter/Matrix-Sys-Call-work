@@ -201,7 +201,7 @@ bool bitwise_shift_matrix (Matrix_t* a, char direction, unsigned int shift) {
 bool add_matrices (Matrix_t* a, Matrix_t* b, Matrix_t* c) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	if(!a || !b || !c){
+	if(!a || !b || !c || !a->data || !b->data || !c->data){
 		return false;
 	}
 	//####################################
