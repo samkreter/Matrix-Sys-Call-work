@@ -271,7 +271,8 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
  * INPUTS:
  *	mats: double pointer to the struct witht he array of matrices
  * RETURN:
- *  void
+ *  if no errors rturns the position of the matrix
+ *  else -1
  *
  * NOTE:: had to add check in for loop to stop seg fault if matrix not found
  **/
